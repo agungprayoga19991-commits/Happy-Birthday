@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Sayang! 💗</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: #5b3043;
+      background: #fff7fb;
+      overflow-x: hidden;
+    }
+
+    .hearts, .sparkles { position: fixed; inset: 0; pointer-events: none; z-index: 20; }
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      animation: floatUp linear forwards;
+      opacity: .8;
+      filter: drop-shadow(0 3px 5px #e9a5bd);
+    }
+    @keyframes floatUp {
+      from { transform: translateY(0) rotate(0deg); opacity: 0; }
+      15% { opacity: .8; }
+      to { transform: translateY(-110vh) rotate(35deg); opacity: 0; }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      position: relative;
+      padding: 40px 20px;
+      background:
+        radial-gradient(circle at 15% 20%, #ffd6e6 0 8%, transparent 25%),
+        radial-gradient(circle at 90% 15%, #ffe7b8 0 7%, transparent 23%),
+        linear-gradient(135deg, #fff4fa, #ffe7f0 50%, #fff8ed);
+    }
+
+    .hero-card {
+      width: min(1000px, 94vw);
+      padding: 45px;
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 38px;
+      background: rgba(255,255,255,.62);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 25px 80px rgba(148, 72, 102, .18);
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 15px;
+      border-radius: 99px;
+      background: #fff;
+      color: #d4517c;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(180,80,120,.12);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: .9;
+      margin: 18px 0;
+      letter-spacing: -4px;
+      color: #c83f6e;
+    }
+    h1 span { color: #f19a32; }
+    .subtitle { font-size: 1.15rem; line-height: 1.8; max-width: 600px; }
+
+    .photo-wrap {
+      position: relative;
+      transform: rotate(3deg);
+      padding: 12px;
+      border-radius: 30px;
+      background: white;
+      box-shadow: 0 22px 45px rgba(96,48,68,.2);
+    }
+    .photo-wrap img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 22px;
+    }
+    .sticker {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      background: #ffd35e;
+      width: 105px;
+      height: 105px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 900;
+      transform: rotate(-12deg);
+      box-shadow: 0 10px 25px rgba(120,80,20,.2);
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      margin-top: 22px;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, #e84e82, #f39b3f);
+      box-shadow: 0 10px 25px rgba(220,77,120,.3);
+      transition: .2s;
+    }
+    .btn:hover { transform: translateY(-3px) scale(1.02); }
+
+    section { padding: 90px 20px; }
+    .section-inner { width: min(1050px, 94vw); margin: auto; }
+    .title { text-align: center; font-size: clamp(2rem, 5vw, 3.5rem); margin: 0 0 12px; color: #b83d68; }
+    .center { text-align: center; }
+
+    .reasons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 35px;
+    }
+    .reason {
+      background: white;
+      border-radius: 25px;
+      padding: 28px;
+      box-shadow: 0 12px 35px rgba(125,61,89,.09);
+      transition: .25s;
+    }
+    .reason:hover { transform: translateY(-8px) rotate(-1deg); }
+    .emoji { font-size: 2.5rem; }
+    .reason h3 { margin-bottom: 8px; color: #ca4c78; }
+
+    .letter {
+      max-width: 800px;
+      margin: 35px auto 0;
+      padding: 35px;
+      border-radius: 28px;
+      background: #fffdf8;
+      border: 2px dashed #f0b3c7;
+      box-shadow: 0 15px 40px rgba(125,61,89,.08);
+      line-height: 1.9;
+      font-size: 1.05rem;
+    }
+
+    .secret {
+      background: linear-gradient(135deg, #c93e6c, #8e3155);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .secret .title { color: white; }
+    .counter {
+      display: inline-flex;
+      gap: 12px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .count-box {
+      min-width: 95px;
+      padding: 15px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 18px;
+    }
+    .count-box b { display: block; font-size: 1.8rem; }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      background: #fff0f6;
+      font-weight: 700;
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(60,20,38,.55);
+      z-index: 50;
+      padding: 20px;
+    }
+    .popup.show { display: grid; }
+    .popup-card {
+      width: min(500px, 94vw);
+      background: white;
+      border-radius: 30px;
+      padding: 35px;
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+      animation: pop .35s ease;
+    }
+    @keyframes pop {
+      from { transform: scale(.75) rotate(-4deg); opacity: 0; }
+      to { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    .confetti { position: fixed; width: 10px; height: 16px; top: -20px; z-index: 60; animation: fall 2.7s linear forwards; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+    @media (max-width: 760px) {
+      .hero-card { grid-template-columns: 1fr; padding: 25px; }
+      .hero-copy { text-align: center; }
+      h1 { letter-spacing: -2px; }
+      .reasons { grid-template-columns: 1fr; }
+      .photo-wrap { width: min(430px, 85vw); margin: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<header class="hero">
+  <div class="hero-card">
+    <div class="hero-copy">
+      <span class="badge">💌 Sebuah pesan kecil untuk orang spesial</span>
+      <h1>Happy<br><span>Birthday!</span> 🎂</h1>
+      <p class="subtitle">
+        Selamat ulang tahun untuk perempuan yang berhasil bikin hari-hari biasa
+        terasa jauh lebih istimewa. Semoga hari ini penuh senyum, makanan enak,
+        kejutan kecil, dan tentunya... aku. 😌💗
+      </p>
+      <button class="btn" onclick="openSurprise()">🎁 Klik kalau kamu berani...</button>
+    </div>
+
+    <div class="photo-wrap">
+      <img src="foto.jpeg" alt="Foto orang tersayang">
+      <div class="sticker">YOU<br>ARE<br>✨ CUTE ✨</div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="section-inner">
+    <h2 class="title">Kenapa kamu spesial? 🥹</h2>
+    <p class="center">Jawabannya sebenarnya panjang banget, tapi kita mulai dari tiga dulu.</p>
+
+    <div class="reasons">
+      <article class="reason">
+        <div class="emoji">🌷</div>
+        <h3>Senyummu</h3>
+        <p>Satu senyum kamu kadang cukup buat mood yang tadinya berantakan jadi balik lagi.</p>
+      </article>
+      <article class="reason">
+        <div class="emoji">🫶</div>
+        <h3>Caramu Peduli</h3>
+        <p>Hal-hal kecil yang kamu lakukan sering kali lebih berarti daripada yang kamu sadari.</p>
+      </article>
+      <article class="reason">
+        <div class="emoji">✨</div>
+        <h3>Kamu ya Kamu</h3>
+        <p>Nggak perlu jadi siapa-siapa. Jadi dirimu sendiri saja sudah lebih dari cukup.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff0f6;">
+  <div class="section-inner">
+    <h2 class="title">💌 Surat kecil</h2>
+    <div class="letter">
+      <p><b>Untuk kamu yang ulang tahun hari ini,</b></p>
+      <p>
+        Di hari spesialmu ini, aku cuma mau bilang terima kasih karena sudah hadir
+        dan membuat banyak hal terasa lebih menyenangkan. Aku mungkin nggak selalu
+        pandai mengungkapkan semuanya, tapi aku benar-benar menghargai setiap
+        cerita, tawa, obrolan random, dan momen kecil yang kita punya.
+      </p>
+      <p>
+        Semoga di umur yang baru ini kamu makin dekat dengan semua hal yang kamu
+        impikan. Semoga langkahmu dimudahkan, hatimu dijaga, dan senyummu tetap
+        sering muncul.
+      </p>
+      <p>
+        Dan kalau boleh egois sedikit... semoga aku masih boleh jadi salah satu
+        alasan kamu tersenyum di tahun-tahun berikutnya. 🤍
+      </p>
+      <p><b>Happy birthday, sayang. I love you. ❤️</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="secret">
+  <div class="section-inner">
+    <h2 class="title">Ada satu hal lagi... 👀</h2>
+    <p>Karena ulang tahun cuma sekali setahun, hari ini kamu wajib bahagia.</p>
+
+    <div class="counter">
+      <div class="count-box"><b id="days">00</b>Hari</div>
+      <div class="count-box"><b id="hours">00</b>Jam</div>
+      <div class="count-box"><b id="minutes">00</b>Menit</div>
+      <div class="count-box"><b id="seconds">00</b>Detik</div>
+    </div>
+    <p>...sampai hari ulang tahunmu selesai. 😆</p>
+    <button class="btn" onclick="makeWish()">🪄 Buat permintaan rahasia</button>
+  </div>
+</section>
+
+<footer>
+  Made with ❤️, sedikit HTML, banyak rasa, dan sedikit drama.
+</footer>
+
+<div class="popup" id="popup" onclick="closeSurprise(event)">
+  <div class="popup-card">
+    <div style="font-size:4rem;">🥳💗🎂</div>
+    <h2>Surprise!</h2>
+    <p id="popupText">
+      Kamu adalah salah satu hal paling manis yang pernah terjadi dalam hidupku.
+    </p>
+    <button class="btn" onclick="closeSurprise()">Awww 🥹</button>
+  </div>
+</div>
+
+<script>
+  // Floating hearts
+  function createHeart() {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = ["💗","💕","💖","💘","🌸"][Math.floor(Math.random()*5)];
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (16 + Math.random()*25) + "px";
+    h.style.animationDuration = (5 + Math.random()*6) + "s";
+    document.getElementById("hearts").appendChild(h);
+    setTimeout(() => h.remove(), 12000);
+  }
+  setInterval(createHeart, 650);
+
+  function openSurprise() {
+    document.getElementById("popup").classList.add("show");
+    confetti();
+  }
+
+  function closeSurprise(e) {
+    if (!e || e.target.id === "popup" || e.target.tagName === "BUTTON") {
+      document.getElementById("popup").classList.remove("show");
+    }
+  }
+
+  function confetti() {
+    const symbols = ["💗","✨","🎉","🌸","💖","⭐"];
+    for (let i=0; i<55; i++) {
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      c.style.left = Math.random()*100 + "vw";
+      c.style.animationDelay = Math.random()*.8 + "s";
+      c.style.fontSize = (14 + Math.random()*20) + "px";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3500);
+    }
+  }
+
+  function makeWish() {
+    const wishes = [
+      "Semoga semua yang kamu doakan diam-diam segera menemukan jalannya. ✨",
+      "Semoga tahun ini lebih banyak bahagia daripada overthinking. 😌",
+      "Semoga rezeki lancar, hati tenang, dan senyum terus. 🌷",
+      "Semoga kita punya semakin banyak cerita lucu untuk dikenang. 💗"
+    ];
+    document.getElementById("popupText").textContent =
+      wishes[Math.floor(Math.random()*wishes.length)];
+    document.getElementById("popup").classList.add("show");
+    confetti();
+  }
+
+  // Countdown until midnight
+  function updateCountdown() {
+    const now = new Date();
+    const end = new Date();
+    end.setHours(24,0,0,0);
+    let diff = Math.max(0, end - now);
+    const d = Math.floor(diff / 86400000); diff %= 86400000;
+    const h = Math.floor(diff / 3600000); diff %= 3600000;
+    const m = Math.floor(diff / 60000); diff %= 60000;
+    const s = Math.floor(diff / 1000);
+    document.getElementById("days").textContent = String(d).padStart(2,"0");
+    document.getElementById("hours").textContent = String(h).padStart(2,"0");
+    document.getElementById("minutes").textContent = String(m).padStart(2,"0");
+    document.getElementById("seconds").textContent = String(s).padStart(2,"0");
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
